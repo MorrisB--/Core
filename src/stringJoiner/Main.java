@@ -8,7 +8,7 @@ public class Main {
 		sj.add("Practicing").add("String");
 		sj.add("Joiner");
 		System.out.println(sj);
-		
+
 		StringJoiner sj2 = new StringJoiner(", ");
 		// Will only print if add() was never called
 		sj2.setEmptyValue("STRING_IS_EMPTY");
