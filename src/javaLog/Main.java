@@ -11,10 +11,17 @@ public class Main {
 	public static void main(String[] args) {
 
 		logger.setLevel(Level.INFO);
-		logger.log(Level.SEVERE, "Severe message");
-		logger.log(Level.INFO, "Info level message");
-		logger.log(Level.FINE, "Should not be seeing this message");
+		logger.severe("Severe message");
+		logger.info("Info level message");
+		logger.fine("Should not be seeing this message");
 
+	}
+	
+	public static void doingSomething() {
+		logger.setLevel(Level.ALL);
+		logger.entering("javalog.Main", "doingSomething()");
+		logger.logp(Level.WARNING, "javalog.Main", "doingSomething()", "This method is not doing anything");
+		logger.exiting("javaLog.Main", "doingSomething()");
 	}
 
 }
