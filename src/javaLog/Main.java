@@ -10,8 +10,11 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		logger.log(Level.INFO, "Testing log messages");
-		logger.log(Level.INFO, "Another message");
+		logger.setLevel(Level.INFO);
+		logger.log(Level.SEVERE, "Severe message");
+		logger.log(Level.INFO, "Info level message");
+		logger.log(Level.FINE, "Should not be seeing this message");
+
 	}
 
 }
