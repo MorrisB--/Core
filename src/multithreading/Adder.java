@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Adder {
+public class Adder implements Runnable {
 
 	private String inFile, outFile;
 
@@ -18,14 +18,23 @@ public class Adder {
 
 		int total = 0;
 		String line = null;
-		
-		try (BufferedReader reader = Files.newBufferedReader(Paths.get(inFile))){
-			while ((line = reader.readLine()) !=null)
+
+		try (BufferedReader reader = Files.newBufferedReader(Paths.get(inFile))) {
+			while ((line = reader.readLine()) != null)
 				total += Integer.parseInt(line);
 		}
-		
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(outFile))){
+
+		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(outFile))) {
 			writer.write("Total: " + total);
+		}
+	}
+
+	@Override
+	public void run() {
+		try {
+			doAdd();
+		} catch (IOException e) {
+
 		}
 	}
 
