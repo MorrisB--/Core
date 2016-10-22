@@ -12,6 +12,8 @@ public class Adder implements Runnable {
 
 	public Adder(String inFile, String outFile) {
 
+		this.inFile = inFile;
+		this.outFile = outFile;
 	}
 
 	public void doAdd() throws IOException {
