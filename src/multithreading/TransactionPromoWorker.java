@@ -11,14 +11,16 @@ public class TransactionPromoWorker extends TransactionWorker {
 		if (transactionType == 'w')
 			account.withdrawal(amount);
 		else if (transactionType == 'd') {
-			account.deposit(amount);
-			/*
-			 * Giving a 10% bonus if the account has more than $500 after the
-			 * deposit
-			 */
-			if (account.getBalance() > 500) {
-				int bonus = (int) ((account.getBalance() - 500) * 0.1);
-				account.deposit(bonus);
+			synchronized (account) {
+				account.deposit(amount);
+				/*
+				 * Giving a 10% bonus if the account has more than $500 after
+				 * the deposit
+				 */
+				if (account.getBalance() > 500) {
+					int bonus = (int) ((account.getBalance() - 500) * 0.1);
+					account.deposit(bonus);
+				}
 			}
 		}
 	}
