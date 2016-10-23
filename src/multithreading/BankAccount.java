@@ -12,7 +12,7 @@ public class BankAccount {
 		return this.balance;
 	}
 
-	public synchronized void deposit(int amount) {
+	public void deposit(int amount) {
 		balance += amount;
 	}
 }
