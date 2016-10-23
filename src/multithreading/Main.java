@@ -1,24 +1,26 @@
 package multithreading;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 public class Main {
 	public static void main(String[] args) {
 		String[] inFiles = { "./file1.txt", "./file2.txt" };
 		String[] outFiles = { "./file1.out.txt", "./file2.out.txt" };
-		Thread[] threads = new Thread[inFiles.length];
+		ExecutorService es = Executors.newFixedThreadPool(3);
 
 		for (int i = 0; i < inFiles.length; i++) {
 			Adder adder = new Adder(inFiles[i], outFiles[i]);
-			threads[i] = new Thread(adder);
-			threads[i].start();
+			es.submit(adder);
 		}
-
-		for (Thread thread : threads) {
-			try {
-				thread.join();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		
+		try {
+			
+			es.shutdown();
+			es.awaitTermination(60, TimeUnit.SECONDS);
+		
+		} catch (Exception e) {
 		}
 	}
 }
