@@ -8,11 +8,11 @@ public class BankAccount {
 		this.balance = startingBalance;
 	}
 
-	public int getBalance() {
+	public synchronized int getBalance() {
 		return this.balance;
 	}
 
-	public void deposit(int amount) {
+	public synchronized void deposit(int amount) {
 		balance += amount;
 	}
 }
